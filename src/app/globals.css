@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: var(--font-poppins), sans-serif;
+  --font-heading: var(--font-clash), sans-serif;
   --font-body: var(--font-satoshi), sans-serif;
+  --font-clash-display: var(--font-clash), sans-serif;
 
   --color-neutral-50: #f5f5f6;
   --color-neutral-100: #e5e6e8;
@@ -43,6 +44,22 @@
 
 
 @layer components {
+  .hero-title {
+    font-family: Poppins, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title { font-size: 56px; }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title { font-size: 72px; }
+  }
+
   .heading-l  { @apply font-heading font-semibold text-[72px] leading-[1.2]; }
   .heading-m  { @apply font-heading font-semibold text-[44px] leading-[1.2]; }
   .heading-s  { @apply font-heading font-semibold text-[36px] leading-[1.2]; }
