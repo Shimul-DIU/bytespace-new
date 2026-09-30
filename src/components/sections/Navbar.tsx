@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-40 text-white">
-      <nav className="mx-auto flex h-[100px] max-w-[1440px] items-center justify-between px-6 md:h-[114px] lg:px-[120px]">
+      <nav className="site-container mx-auto flex h-[100px] items-center justify-between px-6 md:h-[114px]">
         <Link href="/" aria-label="ByteSpace home" className="flex items-center  gap-[10px]">
           <Image src="/images/logo.svg" alt="" width={29} height={32} priority />
           <span className="flex h-[30px] pt-2 w-[134px] items-center font-clash-display text-[24px] font-bold leading-[1] tracking-[0px]">
