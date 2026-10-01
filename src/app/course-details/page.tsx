@@ -167,8 +167,8 @@ export default function CourseDetailsPage() {
           {/* left column */}
           <div className="min-w-0">
             <div role="tablist" aria-label="Course sections" className="flex gap-3">
-              {tabs.map((t) => t === "Lessons" ? (
-                <Link key={t} href="/course-lessons" className="label-m flex h-10 items-center rounded-full bg-neutral-50 px-5 text-neutral-700 transition-colors hover:bg-neutral-100">
+              {tabs.map((t) => t === "Lessons" || t === "Reviews" ? (
+                <Link key={t} href={t === "Lessons" ? "/course-lessons" : "/course-reviews"} className="label-m flex h-10 items-center rounded-full bg-neutral-50 px-5 text-neutral-700 transition-colors hover:bg-neutral-100">
                   {t}
                 </Link>
               ) : (
