@@ -26,7 +26,7 @@ function FormField({
   );
 }
 
-export default function RegisterPage() {
+export default function signup() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -49,47 +49,43 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="relative min-h-screen bg-white lg:bg-primary-600">
-      {/* grid background (desktop only) */}
+    <main className="relative min-h-dvh w-full overflow-hidden bg-primary-600 pt-[100px] md:pt-[114px]">
+      {/* grid background (all devices) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 hidden lg:block"
+        className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: `linear-gradient(${grid} 1px, transparent 1px), linear-gradient(90deg, ${grid} 1px, transparent 1px)`,
           backgroundSize: "120px 120px",
         }}
       />
 
-      <div className="relative mx-auto grid min-h-screen max-w-[1440px] lg:grid-cols-[1fr_579px] lg:gap-10 lg:px-[120px]">
+      <div className="relative mx-auto grid max-w-[1440px] gap-8 px-4 pb-10 pt-4 sm:px-8 lg:grid-cols-[1fr_579px] lg:gap-10 lg:px-[120px] lg:pb-16 lg:pt-6">
         {/* left panel */}
-        <section className="hidden flex-col pb-10 pt-8 text-white lg:flex">
-          <Link href="/" aria-label="ByteSpace home">
-            <Image src="/images/logo.svg" alt="ByteSpace" width={32} height={32} priority />
-          </Link>
-
-          <div className="mt-[52px] max-w-[480px]">
+        <section className="flex flex-col text-white lg:pt-8">
+          <div className="max-w-[480px]">
             <h2 className="heading-xs text-2xl">Sign up and come in</h2>
-            <p className="body-l mt-6">
+            <p className="body-l mt-4 lg:mt-6">
               The registration process is straightforward, uncomplicated, and efficient, allowing
               users to sign up quickly, easily, and at no cost
             </p>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8 hidden sm:block">
             <Image
               src="/images/register-visual.png"
               alt="Course cards and happy students preview"
               width={500}
               height={560}
-              sizes="500px"
+              sizes="(min-width: 1024px) 500px, 80vw"
               className="h-auto w-full max-w-[500px]"
             />
           </div>
         </section>
 
-        {/* right: form card */}
-        <section className="flex lg:py-[120px]">
-          <div className="flex w-full flex-col bg-white px-6 py-16 sm:px-12 lg:rounded-[32px] lg:p-[63px]">
+        {/* right: form card (rounded box on every device) */}
+        <section className="flex">
+          <div className="flex w-full flex-col rounded-[24px] bg-white p-6 sm:p-10 lg:rounded-[32px] lg:p-[63px]">
             <div>
               <p className="body-m text-primary-600">Create an Account</p>
               <h1 className="heading-m mt-1 text-neutral-950">
@@ -99,7 +95,7 @@ export default function RegisterPage() {
               </h1>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-6">
+            <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-6 lg:mt-12">
               <FormField
                 label="Full Name"
                 id="fullName"
@@ -142,7 +138,7 @@ export default function RegisterPage() {
               </div>
             </form>
 
-            <p className="body-m mt-auto pt-16 text-center text-neutral-600">
+            <p className="body-m mt-auto pt-12 text-center text-neutral-600 lg:pt-16">
               Already have an account?{" "}
               <Link href="/login" className="text-primary-600 hover:underline">
                 Login

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
+import Footer from "@/components/sections/Footer";
+import Navbar from "@/components/sections/Navbar";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -47,7 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${clashDisplay.variable} ${satoshi.variable} ${poppins.variable}`}>
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

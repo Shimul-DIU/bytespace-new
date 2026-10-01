@@ -1,4 +1,3 @@
-import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import BrandStrip from "@/components/sections/BrandStrip";
 import CourseIntro from "@/components/sections/CourseIntro";
@@ -7,13 +6,11 @@ import CourseGrid from "@/components/sections/CourseGrid";
 import LearningPaths from "@/components/sections/LearningPaths";
 import GrowthSection from "@/components/sections/GrowthSection";
 import Testimonials from "@/components/sections/Testimonials";
-import Footer from "@/components/sections/Footer";
 import CallToAction from "@/components/sections/CallToAction";
 
 export default function Home() {
   return (
     <main className="relative">
-      <Navbar />
       <Hero />
       <BrandStrip />
       <CourseIntro />
@@ -23,7 +20,6 @@ export default function Home() {
       <GrowthSection />
       <CallToAction></CallToAction>
       <Testimonials />
-      <Footer />
     </main>
   );
 }
