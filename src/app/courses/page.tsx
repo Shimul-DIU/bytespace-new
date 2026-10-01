@@ -56,7 +56,7 @@ export default function CoursesPage() {
   const visible = filtered.slice((current - 1) * pageSize, current * pageSize);
 
   return (
-    <main className="min-h-[3853px] bg-white">
+    <main className="bg-white">
       <section className="relative overflow-hidden bg-primary-600 pb-12 pt-[100px] text-white md:pt-[114px] lg:pb-16">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ backgroundImage: `linear-gradient(${grid} 1px, transparent 1px), linear-gradient(90deg, ${grid} 1px, transparent 1px)`, backgroundSize: "120px 120px" }} />
         <div className="relative mx-auto flex max-w-[1440px] flex-col items-center px-4 pt-6 text-center sm:px-8 lg:pt-10"><h1 className="font-heading text-[32px] font-semibold sm:text-[44px]">Find Your Next Course</h1><form role="search" onSubmit={(event) => event.preventDefault()} className="mt-6 flex w-full max-w-[665px] flex-col gap-3 sm:flex-row"><label className="relative flex-1"><span className="sr-only">Search courses</span><Icon className="pointer-events-none absolute left-5 top-1/2 size-[17.49px] -translate-y-1/2 text-[#82868E]" d="M21 21l-4.3-4.3M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" /><input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder="Search" className="body-m h-12 w-full appearance-none rounded-full bg-white pl-12 pr-5 text-neutral-950 outline-none [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none" /></label><select value="Courses" aria-label="Search in" className="label-m h-12 cursor-pointer rounded-full bg-secondary-500 px-6 text-neutral-950 outline-none"><option>Courses</option></select></form></div>
