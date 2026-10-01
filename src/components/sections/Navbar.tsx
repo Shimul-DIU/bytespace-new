@@ -2,16 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "Courses", href: "/course-details" },
+  { label: "Courses", href: "/courses" },
   { label: "Creators", href: "/creator" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="absolute inset-x-0 top-0 z-40 text-white">
@@ -24,9 +26,15 @@ export default function Navbar() {
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
-          {links.map((l, i) => (
+          {links.map((l) => (
             <li key={l.label}>
-              <Link href={l.href} className={`label-m transition-opacity hover:opacity-100 ${i === 0 ? "opacity-100" : "opacity-80"}`}>
+              <Link
+                href={l.href}
+                className={`label-m transition-opacity hover:opacity-100 ${pathname === l.href || (l.href === "/" && pathname === "/")
+                  ? "text-white opacity-100"
+                  : "text-white opacity-70"
+                  }`}
+              >
                 {l.label}
               </Link>
             </li>
