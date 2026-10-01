@@ -7,7 +7,7 @@ import { useState } from "react";
 const links = [
   { label: "Home", href: "/" },
   { label: "Courses", href: "/course-details" },
-  { label: "Creators", href: "#creators" },
+  { label: "Creators", href: "/creator" },
 ];
 
 export default function Navbar() {
