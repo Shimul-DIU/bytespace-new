@@ -167,17 +167,18 @@ export default function CourseDetailsPage() {
           {/* left column */}
           <div className="min-w-0">
             <div role="tablist" aria-label="Course sections" className="flex gap-3">
-              {tabs.map((t) => (
+              {tabs.map((t) => t === "Lessons" ? (
+                <Link key={t} href="/course-lessons" className="label-m flex h-10 items-center rounded-full bg-neutral-50 px-5 text-neutral-700 transition-colors hover:bg-neutral-100">
+                  {t}
+                </Link>
+              ) : (
                 <button
                   key={t}
                   role="tab"
                   type="button"
                   aria-selected={tab === t}
                   onClick={() => setTab(t)}
-                  className={`label-m h-10 rounded-full px-5 transition-colors ${tab === t
-                    ? "bg-secondary-500 text-neutral-950"
-                    : "bg-neutral-50 text-neutral-700 hover:bg-neutral-100"
-                    }`}
+                  className={`label-m h-10 rounded-full px-5 transition-colors ${tab === t ? "bg-secondary-500 text-neutral-950" : "bg-neutral-50 text-neutral-700 hover:bg-neutral-100"}`}
                 >
                   {t}
                 </button>
