@@ -84,11 +84,37 @@
     margin-inline: auto;
   }
 
-  @media (min-width: 1081px) {
-    .site-container { width: 80%; }
-  }
-
   .container-grid {
     @apply mx-auto grid w-full max-w-[1440px] grid-cols-12 gap-x-10 px-[120px];
+  }
+}
+
+/* ---------- Responsive container widths (unlayered, so they win over utilities) ---------- */
+
+/* 768px – 1240px: 80% */
+@media (min-width: 768px) and (max-width: 1240px) {
+  .site-container,
+  .container-grid,
+  .max-w-\[1440px\],
+  .max-w-\[1200px\],
+  .max-w-\[1086px\],
+  .max-w-\[917px\] {
+    width: 80%;
+    max-width: 80%;
+    margin-inline: auto;
+  }
+}
+
+/* Above 1240px: 80vw */
+@media (min-width: 1241px) {
+  .site-container,
+  .container-grid,
+  .max-w-\[1440px\],
+  .max-w-\[1200px\],
+  .max-w-\[1086px\],
+  .max-w-\[917px\] {
+    width: 80vw;
+    max-width: 80vw;
+    margin-inline: auto;
   }
 }

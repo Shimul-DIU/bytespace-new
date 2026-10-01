@@ -74,7 +74,7 @@ export default function Hero() {
       />
 
       {/* text content */}
-      <div className="relative z-30 mx-auto mt-[90px] flex h-auto w-full max-w-[1200px] flex-col items-center gap-4  md:gap-6 px-6 text-center sm:mt-[110px] md:gap-8 lg:mt-[130px] lg:h-[345px] lg:gap-[60px] lg:px-0">
+      <div className="relative z-30 mx-auto mt-[90px] flex h-auto w-full max-w-[1200px] flex-col items-center gap-4 px-6 text-center sm:mt-[110px] md:gap-8 lg:mt-[130px] lg:h-[345px] lg:gap-[60px] lg:px-0">
         <h1 className="hero-title mx-auto w-full">
           Get Access to Hundreds <br className="hidden md:block" />
           Courses Available
