@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+const poppins = Poppins({
+  weight: "600",
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  display: "swap",
+});
 
 const clashDisplay = localFont({
   src: [
@@ -38,7 +46,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${clashDisplay.variable} ${satoshi.variable}`}>{children}</body>
+      <body className={`${clashDisplay.variable} ${satoshi.variable} ${poppins.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

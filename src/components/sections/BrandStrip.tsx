@@ -4,7 +4,7 @@ export default function BrandStrip() {
   return (
     <section
       aria-label="Partner brands"
-      className="flex h-[202px] w-full items-center bg-[#F5F5F6]"
+      className="flex w-full items-center bg-[#F5F5F6]"
     >
       <Image
         src="/images/Frame-2.svg"

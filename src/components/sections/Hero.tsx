@@ -1,6 +1,6 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import Button from "../ui/Button";
-import FloatingCard from "../ui/FloatingCard";
 
 const grid = "rgba(79,157,255,0.35)";
 const studentAvatars = [1, 2, 3, 4, 5, 6].map(
@@ -16,9 +16,42 @@ function SearchIcon() {
   );
 }
 
+/* White info card.
+   - Fills the free space beside the student, up to maxW.
+   - `pull` = how far (as a fraction of the student width) the card tucks into
+     the student image's transparent margin, so it sits right next to the
+     person but never on top of them. */
+function SideCard({
+  children,
+  maxW,
+  side,
+  pull,
+}: {
+  children: ReactNode;
+  maxW: string;
+  side: "left" | "right";
+  pull: number;
+}) {
+  const p = `calc(var(--sw) * ${pull})`;
+  return (
+    <div
+      className="pointer-events-auto rounded-[clamp(10px,1.5vw,16px)] bg-white p-[clamp(6px,1.1vw,16px)] text-neutral-950 shadow-[0_8px_24px_rgba(7,30,95,0.15)]"
+      style={{
+        width: `calc(100% + ${p})`,
+        maxWidth: maxW,
+        ...(side === "left"
+          ? { marginRight: `calc(${p} * -1)` }
+          : { marginLeft: `calc(${p} * -1)` }),
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[900px] flex-col items-center overflow-hidden bg-primary-600 text-white lg:min-h-[1024px]">
+    <section className="relative flex min-h-[720px] flex-col items-center overflow-hidden bg-primary-600 text-white md:min-h-[760px] lg:min-h-[1024px]">
       {/* grid background */}
       <div
         aria-hidden="true"
@@ -27,17 +60,6 @@ export default function Hero() {
           backgroundImage: `linear-gradient(to right, ${grid} 1px, transparent 1px), linear-gradient(to bottom, ${grid} 1px, transparent 1px)`,
           backgroundSize: "120px 120px",
         }}
-      />
-
-      {/* Ellipse base, with the ornament layer above it */}
-      <Image
-        src="/images/Ellipse%207.svg"
-        alt=""
-        width={1149}
-        height={1149}
-        sizes="79.8vw"
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[582px] z-10 h-[79.8vw] max-h-[1149px] w-[79.8vw] max-w-[1149px] -translate-x-1/2"
       />
 
       {/* 3D ornaments */}
@@ -52,12 +74,12 @@ export default function Hero() {
       />
 
       {/* text content */}
-      <div className="relative z-30 mx-auto mt-[90px] flex h-auto w-full max-w-[1200px] flex-col items-center gap-6 px-6 text-center sm:mt-[110px] sm:gap-8 lg:mt-[130px] lg:h-[345px] lg:gap-[60px] lg:px-0">
-        <h1 className="hero-title mx-auto w-full ">
+      <div className="relative z-30 mx-auto mt-[90px] flex h-auto w-full max-w-[1200px] flex-col items-center gap-4  md:gap-6 px-6 text-center sm:mt-[110px] md:gap-8 lg:mt-[130px] lg:h-[345px] lg:gap-[60px] lg:px-0">
+        <h1 className="hero-title mx-auto w-full">
           Get Access to Hundreds <br className="hidden md:block" />
           Courses Available
         </h1>
-        <p className="body-l mx-auto w-full  text-center text-white/90">
+        <p className="body-l mx-auto w-full text-center text-white/90">
           Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.
         </p>
 
@@ -74,63 +96,100 @@ export default function Hero() {
         </form>
       </div>
 
-      {/* visual stage */}
-      <div className="relative z-30 mx-auto mt-16 h-[420px] w-full max-w-[1440px] flex-1 lg:h-[450px] lg:flex-none">
-        <Image
-          src="/images/Image.png"
-          alt="Smiling student with headset holding a laptop"
-          width={578}
-          height={541}
-          sizes="(min-width: 1440px) 578px, 90vw"
-          priority
-          className="absolute bottom-0 left-1/2 h-auto w-[360px] -translate-x-1/2 sm:w-[480px] lg:bottom-auto lg:top-[-59px] lg:h-[min(541px,84.2vw)] lg:w-[min(578px,90vw)]"
-          style={{
-            filter:
-              "drop-shadow(0.52px 0.74px 3.04px #0000000A) drop-shadow(2.23px 3.19px 5.72px #0000000F) drop-shadow(5.38px 7.69px 9.57px #00000012) drop-shadow(10.21px 14.58px 16.09px #00000014) drop-shadow(16.95px 24.21px 24px #00000017) drop-shadow(25.84px 36.91px 36px #0000001A) drop-shadow(37.12px 53.03px 56px #0000001B) drop-shadow(51.04px 72.91px 72px #00000021)",
-          }}
-        />
+      {/* visual stage. --sw = student width (578px on desktop, shrinks on smaller screens) */}
+      <div className="relative z-30 mx-auto mt-auto h-[calc(var(--sw)*0.936+48px)] w-full max-w-[1440px] [--sw:clamp(170px,40vw,578px)] lg:mt-16 lg:h-[450px]">
+        {/* student + ellipse share one wrapper so they always scale together.
+            Same position as the original desktop layout. */}
+        <div className="absolute inset-x-0 bottom-0 z-10 mx-auto aspect-[578/541] w-[var(--sw)] lg:bottom-0">
+          <Image
+            src="/images/Ellipse%207.svg"
+            alt=""
+            width={1149}
+            height={1149}
+            sizes="(min-width: 1440px) 1149px, 80vw"
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[18.85%] h-auto w-[198.8%] max-w-none -translate-x-1/2"
+          />
+          <Image
+            src="/images/student.png"
+            alt="Smiling student with headset holding a laptop"
+            width={578}
+            height={541}
+            sizes="(min-width: 1440px) 578px, 40vw"
+            priority
+            className="absolute bottom-[-12%] left-1/2 z-20 h-auto w-[145%] max-w-none -translate-x-1/2"
+            style={{
+              filter:
+                "drop-shadow(0.52px 0.74px 3.04px #0000000A) drop-shadow(2.23px 3.19px 5.72px #0000000F) drop-shadow(5.38px 7.69px 9.57px #00000012) drop-shadow(10.21px 14.58px 16.09px #00000014) drop-shadow(16.95px 24.21px 24px #00000017) drop-shadow(25.84px 36.91px 36px #0000001A) drop-shadow(37.12px 53.03px 56px #0000001B) drop-shadow(51.04px 72.91px 72px #00000021)",
+            }}
+          />
+          <Image
+            src="/images/Image.png"
+            alt=""
+            width={578}
+            height={541}
+            sizes="(min-width: 1440px) 578px, 40vw"
+            aria-hidden="true"
+            className="relative h-auto w-full opacity-0"
+          />
+        </div>
 
-        <FloatingCard className="absolute left-[calc(50%-336px)] top-[92px] hidden lg:block">
-          <p className="label-m">UI/UX Design</p>
-          <p className="body-xs mt-1 text-neutral-400">200 Courses &nbsp;&#8226;&nbsp; 1000+ Students</p>
-        </FloatingCard>
+        {/* cards layer: same box as the student, but full width, so the
+            cards stay level with the student and hug its left/right sides */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 grid h-[calc(var(--sw)*0.936)] grid-cols-[1fr_var(--sw)_1fr] lg:bottom-0">
+          {/* left cards */}
+          <div className="flex min-w-0 flex-col items-end justify-between gap-2 pl-2 sm:pb-[calc(var(--sw)*0.14)] sm:pl-3 sm:pt-[calc(var(--sw)*0.26)]">
+            <SideCard side="left" pull={0.2} maxW="220px">
+              <p className="label-m text-[clamp(11px,2.1vw,16px)]">UI/UX Design</p>
+              <p className="body-xs mt-1 text-[clamp(8px,1.5vw,12px)] text-neutral-400">
+                200 Courses &#8226; 1000+ Students
+              </p>
+            </SideCard>
 
-        <FloatingCard className="absolute left-[58.47%] top-[109px] hidden h-[131px] w-[232px] flex-col justify-between gap-2 p-4 lg:flex">
-          <p className="label-s">Learning Progress</p>
-          <p className="heading-m">55%</p>
-          <div className="h-2 w-full rounded-full bg-neutral-100">
-            <div className="h-full w-[55%] rounded-full bg-secondary-500" />
+            <SideCard side="left" pull={0.12} maxW="258px">
+              <p className="label-m text-[clamp(11px,2.1vw,16px)] text-black">Happy Students</p>
+              <p className="body-xs mt-0.5 flex items-center gap-1 text-[clamp(8px,1.5vw,12px)] text-neutral-500">
+                4.5 (240)
+                <Image src="/images/Star.svg" alt="" width={12} height={12} sizes="12px" />
+              </p>
+              <div className="mt-[clamp(4px,0.9vw,12px)] flex items-center">
+                {studentAvatars.map((src, i) => (
+                  <Image
+                    key={src}
+                    src={src}
+                    alt=""
+                    width={43}
+                    height={43}
+                    sizes="43px"
+                    className={`size-[clamp(18px,3vw,43px)] rounded-full object-cover [&:not(:first-child)]:-ml-[clamp(5px,0.9vw,13px)] ${i >= 3 ? "hidden sm:block" : ""}`}
+                  />
+                ))}
+                <Image
+                  src="/images/Group.png"
+                  alt="2K+ students"
+                  width={43}
+                  height={43}
+                  sizes="43px"
+                  className="-ml-[clamp(5px,0.9vw,13px)] size-[clamp(18px,3vw,43px)] rounded-full object-cover"
+                />
+              </div>
+            </SideCard>
           </div>
-        </FloatingCard>
 
-        <FloatingCard className="absolute bottom-4 left-1/2 flex h-[121px] w-full max-w-[258px] -translate-x-1/2 flex-col gap-2 p-4 lg:bottom-[44px] lg:left-[15.78%] lg:translate-x-0">
-          <div className="flex flex-col gap-0.5">
-            <p className="label-m text-black">Happy Students</p>
-            <p className="body-xs flex items-center gap-1 text-neutral-500">
-              4.5 (240)
-              <Image src="/images/Star.svg" alt="" width={12} height={12} sizes="12px" />
-            </p>
+          {/* empty middle column = the student */}
+          <div aria-hidden="true" />
+
+          {/* right cards */}
+          <div className="flex min-w-0 flex-col items-start pr-2 pt-[calc(var(--sw)*0.12)] sm:pr-3 sm:pt-[calc(var(--sw)*0.29)]">
+            <SideCard side="right" pull={0.24} maxW="232px">
+              <p className="label-s text-[clamp(9px,1.9vw,14px)]">Learning Progress</p>
+              <p className="heading-m mt-[clamp(2px,0.6vw,8px)] text-[clamp(20px,4vw,44px)]">55%</p>
+              <div className="mt-[clamp(4px,0.9vw,12px)] h-[clamp(4px,0.6vw,8px)] w-full rounded-full bg-neutral-100">
+                <div className="h-full w-[55%] rounded-full bg-secondary-500" />
+              </div>
+            </SideCard>
           </div>
-          <div className="flex -space-x-[13px]">
-            {studentAvatars.map((src) => (
-              <Image
-                key={src}
-                src={src}
-                alt=""
-                width={43}
-                height={43}
-                sizes="43px"
-              />
-            ))}
-            <Image
-              src="/images/Group.png"
-              alt="2K+ students"
-              width={43}
-              height={43}
-              sizes="43px"
-            />
-          </div>
-        </FloatingCard>
+        </div>
       </div>
     </section>
   );

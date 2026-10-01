@@ -83,7 +83,7 @@ function CourseCard({ title, image }: (typeof courses)[number]) {
 
 export default function CourseGrid() {
   return (
-    <section id="courses" aria-label="Featured courses" className="mt-[13px] w-full bg-white pb-20">
+    <section id="courses" aria-label="Featured courses" className="mt-[13px] w-full bg-white pb-[72px]">
       <div className="mx-auto grid w-[calc(100%-32px)] max-w-[1200px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {courses.map((course) => (
           <CourseCard key={course.title} {...course} />
